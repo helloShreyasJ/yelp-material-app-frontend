@@ -1,7 +1,7 @@
 <div> 
   <h1 id="add-restaurants-header" class="mat-headline-1">Add Restaurants</h1>
 
-  <form>
+  <form [formGroup]="restaurantForm" (ngSubmit)="executeAddRestaurantCommand()">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" placeholder="e.g. McDonalds">
@@ -45,7 +45,17 @@
     <ng-container matColumnDef="rating">
       <th mat-header-cell *matHeaderCellDef> Ratings </th>
       <td mat-cell *matCellDef="let element">
-        <!--TODO-->
+        <div class="star-rating-row" style="display: flex; gap: 2px;">
+          
+          @for (isStarFilled of generateStarBlueprint(element.rating); track $index) {
+            @if (isStarFilled === true) {
+              <mat-icon style="color: #212121;">star</mat-icon>
+            }
+            @else {
+              <mat-icon style="color: #212121;">star_border</mat-icon>
+            }
+          }
+        </div>
       </td>
     </ng-container>
 
