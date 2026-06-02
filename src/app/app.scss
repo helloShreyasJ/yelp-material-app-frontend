@@ -1,0 +1,33 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #212121;
+}
+
+.bg-pink-accent {
+    background-color: #feb0d1 !important;
+    color: #4a1525 !important;
+}
+
+#add-restaurants-header {
+    justify-self: center;
+    align-self: center;
+    padding: 10px;
+}
+
+form {
+    justify-self: center;
+    align-self: center;
+}
+
+mat-form-field {
+    padding: 0px 10px;
+}
+
+button {
+    height: 4em;
+    border-radius: 10px;
+    margin: 0px 0px 0px 10px;
+}
