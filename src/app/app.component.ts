@@ -1,14 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { AfterViewInit, Component, signal } from '@angular/core';
+import { MatFormField, MatLabel, MatFormFieldModule } from '@angular/material/form-field';
+import {MatSelect, MatOption ,MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatSelect, MatOption } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { Restaurant } from './restaurant.model';
+import { RestaurantDto } from './restaurant.dto';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RestaurantsService } from './services/restaurant.service';
 
 @Component({
   selector: 'app-root',
@@ -16,64 +15,32 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  displayedColumns: string[] = ['name', 'location', 'priceRange', 'rating', 'actions'];
-  restaurantsList = signal<Restaurant[]>([]);
 
-  /* Test cases */
-  // restaurantsList = signal<Restaurant[]>([
-  //   { name: 'McDonaghs', location: 'Galway', priceRange: '$$', rating: 5 },
-  //   { name: 'Apache Pizza', location: 'Galway', priceRange: '$$', rating: 0 }
-  // ]);
+export class App implements AfterViewInit {
+  displayedColumns: string[] = ['name', 'location', 'priceRange', 'rating', 'actions'];
+  restaurants = signal<RestaurantDto[]>([])
+
+  constructor(private service: RestaurantsService) {}
 
   /* Form validation*/
   restaurantForm = new FormGroup({
-    name: new FormControl('', [
-      Validators.required,
-    ]),
-  
-    location: new FormControl('', [
-      Validators.required,
-    ]),
-  
-    priceRange: new FormControl('$$')
+    name: new FormControl('', [Validators.required]),
+    location: new FormControl('', [Validators.required]),
+    priceRange: new FormControl<number>(2)
   });
 
-  /**
-   * Translates a numeric rating score into a 5 slot boolean array
-   * 
-   * @param ratingScore restaurant score between 0 and 5
-   * @returns array containing 5 elements (true = filled star, false = empty star)
-   */
-  generateStarBlueprint(ratingScore: number): boolean[] {
-    const starBlueprintList: boolean[] = [];
-    for (let currentStarIndex = 0; currentStarIndex < 5; currentStarIndex++) {
-        if (currentStarIndex < ratingScore) {
-          starBlueprintList.push(true);
-        } else {
-          starBlueprintList.push(false);
-        }
-    }
-
-    return starBlueprintList;
+  ngAfterViewInit() {
+    this.fetchInitialData();
   }
-
-  /**
-   * Executed when add button is clicked
-   */
-  executeAddRestaurantCommand() {
-    if (this.restaurantForm.valid) {
-      const formValues = this.restaurantForm.value;
-      
-      const freshNewRestaurant: Restaurant = {
-        name: formValues.name ?? '',
-        location: formValues.location ?? '',
-        priceRange: formValues.priceRange ?? '$$',
-        rating: 0
-      };
-
-      this.restaurantsList.update(currentList => [...currentList, freshNewRestaurant]);
-      this.restaurantForm.reset({ priceRange: '$$' });
-    }
+  
+  fetchInitialData = async () => {
+    this.service.getRestaurantsData().subscribe(async (data) => {
+      this.restaurants.set(data);
+      console.log(this.restaurants);
+    });
+  }
+  
+  executeAddRestaurantCommand = () => {
+    // TODO
   }
 }
