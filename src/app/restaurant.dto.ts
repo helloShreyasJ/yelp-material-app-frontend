@@ -1,5 +1,5 @@
 export interface RestaurantDto {
-    id: number;
+    id?: number;
     name: string;
     location: string;
     priceRange: number;

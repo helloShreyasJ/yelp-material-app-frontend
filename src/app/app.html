@@ -1,7 +1,7 @@
 <div> 
   <h1 id="add-restaurants-header" class="mat-headline-1">Add Restaurants</h1>
 
-  <form [formGroup]="restaurantForm" (ngSubmit)="executeAddRestaurantCommand()">
+  <form [formGroup]="restaurantForm" (ngSubmit)="addRestaurant()">
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" placeholder="e.g. McDonalds">

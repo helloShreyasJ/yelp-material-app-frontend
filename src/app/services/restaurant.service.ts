@@ -14,4 +14,8 @@ export class RestaurantsService {
   getRestaurantsData(): Observable<RestaurantDto[]> {
     return this.httpClient.get<RestaurantDto[]>(this.apiUrl);
   }
+
+  createRestaurant(restaurant: RestaurantDto): Observable<RestaurantDto> {
+    return this.httpClient.post<RestaurantDto>(`${this.apiUrl}/create`, restaurant);
+  }
 }

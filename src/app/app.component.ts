@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, signal } from '@angular/core';
+import { AfterViewInit, Component, OnInit, signal } from '@angular/core';
 import { MatFormField, MatLabel, MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelect, MatOption ,MatSelectModule } from '@angular/material/select';
+import { MatSelect, MatOption ,MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,31 +16,48 @@ import { RestaurantsService } from './services/restaurant.service';
   styleUrl: './app.scss'
 })
 
-export class App implements AfterViewInit {
+export class App implements OnInit {
   displayedColumns: string[] = ['name', 'location', 'priceRange', 'rating', 'actions'];
   restaurants = signal<RestaurantDto[]>([])
-
-  constructor(private service: RestaurantsService) {}
-
-  /* Form validation*/
   restaurantForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     location: new FormControl('', [Validators.required]),
     priceRange: new FormControl<number>(2)
   });
 
-  ngAfterViewInit() {
-    this.fetchInitialData();
+  constructor(private service: RestaurantsService) {}
+
+  ngOnInit() {
+    this.fetchRestaurants();
   }
   
-  fetchInitialData = async () => {
+  fetchRestaurants = async () => {
     this.service.getRestaurantsData().subscribe(async (data) => {
       this.restaurants.set(data);
       console.log(this.restaurants);
     });
   }
   
-  executeAddRestaurantCommand = () => {
-    // TODO
+  addRestaurant = () => {
+    if (this.restaurantForm.invalid) return;
+    
+
+    let formValues = this.restaurantForm.value;
+
+    let r: RestaurantDto = {
+      name: formValues.name ?? '',
+      location: formValues.location ?? '',
+      priceRange: formValues.priceRange ?? 2
+    };
+
+    this.service.createRestaurant(r).subscribe({
+      next: (savedRestaurant) => {
+        this.restaurants.update(currentList => [...currentList, savedRestaurant]);
+        this.restaurantForm.reset({ priceRange: 2 }); 
+      },
+      error: (err) => {
+        console.error("Failed to add restaurant:", err);
+      }
+    })
   }
 }
