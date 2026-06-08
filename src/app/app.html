@@ -67,7 +67,7 @@
 
         <mat-menu #menu="matMenu">
           <button mat-menu-item (click)="openEditModal(element)">Edit</button>
-          <button mat-menu-item (click)="deleteEntry()">Delete</button>
+          <button mat-menu-item (click)="deleteEntry(element.id)">Delete</button>
         </mat-menu>
       </td>
     </ng-container>

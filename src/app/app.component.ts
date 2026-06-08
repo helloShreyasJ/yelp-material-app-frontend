@@ -14,6 +14,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 
 @Component({
   selector: 'app-root',
+  standalone: true,
   imports: [
     MatButtonModule,
     MatMenuModule,
@@ -83,7 +84,7 @@ export class App implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((updatedRestaurant) => {
-      if (updatedRestaurant.id == undefined) return;
+      if (!updatedRestaurant || updatedRestaurant.id === undefined) return;
 
       this.service.updateRestaurant(updatedRestaurant.id, updatedRestaurant).subscribe({
           next: (savedRestaurant) => {
@@ -96,7 +97,14 @@ export class App implements OnInit {
     });
   }
 
-  deleteEntry() {
-    throw new Error('Method not implemented.');
+  deleteEntry(id: number) {
+    if (id == undefined) return; 
+
+    this.service.deleteRestaurant(id).subscribe({
+      next: () => {
+        this.restaurants.update((currentList) => currentList.filter((r) => r.id !== id));
+      },
+      error: (err) => console.error('Failed to delete:', err)
+    })
   }
 }

@@ -22,4 +22,8 @@ export class RestaurantsService {
   updateRestaurant(id: number, restaurant: RestaurantDto): Observable<RestaurantDto> {
     return this.httpClient.put<RestaurantDto>(`${this.apiUrl}/${id}/update`, restaurant);
   }
+
+  deleteRestaurant(id: number): Observable<RestaurantDto[]> {
+    return this.httpClient.delete<RestaurantDto[]>(`${this.apiUrl}/${id}/delete`);
+  }
 }
