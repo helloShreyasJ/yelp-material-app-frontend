@@ -18,4 +18,8 @@ export class RestaurantsService {
   createRestaurant(restaurant: RestaurantDto): Observable<RestaurantDto> {
     return this.httpClient.post<RestaurantDto>(`${this.apiUrl}/create`, restaurant);
   }
+
+  updateRestaurant(id: number, restaurant: RestaurantDto): Observable<RestaurantDto> {
+    return this.httpClient.put<RestaurantDto>(`${this.apiUrl}/${id}/update`, restaurant);
+  }
 }
