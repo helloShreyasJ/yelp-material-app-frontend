@@ -107,4 +107,8 @@ export class App implements OnInit {
       error: (err) => console.error('Failed to delete:', err)
     })
   }
+
+  convertToPriceSymbols(range: number) {
+    return'$'.repeat(range); 
+  }
 }
