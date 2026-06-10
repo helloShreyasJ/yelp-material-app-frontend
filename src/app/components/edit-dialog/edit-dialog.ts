@@ -11,7 +11,7 @@ import {
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatSelect, MatOption } from '@angular/material/select';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { RestaurantDto } from '../restaurant.dto';
+import { RestaurantDto } from '../../models/restaurant.dto';
 
 @Component({
   selector: 'app-edit-dialog',

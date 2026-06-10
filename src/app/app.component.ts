@@ -5,11 +5,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import { RestaurantDto } from './restaurant.dto';
+import { RestaurantDto } from './models/restaurant.dto';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RestaurantsService } from './services/restaurant.service';
 import { MatMenuModule } from '@angular/material/menu';
-import { EditDialog } from './edit-dialog/edit-dialog';
+import { EditDialog } from './components/edit-dialog/edit-dialog';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -80,7 +80,7 @@ export class App implements OnInit {
   openEditModal(restaurantRow: RestaurantDto) {
     const dialogRef = this.dialog.open(EditDialog, {
       width: '350px',
-      data: restaurantRow, // FIX: Pass the row data into the dialog
+      data: restaurantRow
     });
 
     dialogRef.afterClosed().subscribe((updatedRestaurant) => {
