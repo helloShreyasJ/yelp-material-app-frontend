@@ -2,12 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RestaurantDto } from '../models/restaurant.dto'; 
-
+import { environment } from '../../environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantsService {
-  private readonly apiUrl = 'http://localhost:8080/api/restaurants';
+  private readonly apiUrl = `${environment.apiUrl}/restaurants`;
   
   constructor(private httpClient: HttpClient) {}
 
