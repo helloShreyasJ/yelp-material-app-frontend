@@ -1,59 +1,23 @@
-# YelpMaterialApp
+# Angular Material Yelp Clone - Frontend (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.1.
+Single-Page application built with Angular and Angular Material, replicating the core functionalities of a restaurant review platform.
 
-## Development server
+**Live Demo:** https://dashing-duckanoo-556fe4.netlify.app
 
-To start a local development server, run:
+## Architecture & Design Patterns
+This application was recently refactored to strictly adhere to an **MVC-style (Service-Component-Model)** architecture:
+* **Models:** Strongly typed Data Transfer Objects (DTOs) for API consistency.
+* **Views (Components):** Pure UI components utilizing Angular Material for responsive, accessible design.
+* **Controllers (Services):** Centralized HTTP data fetching and state management.
 
-```bash
-ng serve
-```
+## Tech Stack
+* **Framework:** Angular v18
+* **UI Library:** Angular Material
+* **Hosting/Deployment:** Netlify (with custom routing for SPA 404 fallbacks)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Local Development Setup
+1. Clone repository: `git clone https://github.com/helloShreyasJ/yelp-material-app-frontend.git`
+2. Change directory: `cd yelp-material-frontend`
+3. Install dependencies: npm install
+4. Configure environment variables: apiUrl is currently linked with [deployed backend](https://yelp-material-app-backend.onrender.com/api) but can be changed to localhost instance
+5. ng serve
