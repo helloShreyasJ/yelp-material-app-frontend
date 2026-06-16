@@ -17,7 +17,7 @@ This application was recently refactored to strictly adhere to an **MVC-style (S
 
 ## Local Development Setup
 1. Clone repository: `git clone https://github.com/helloShreyasJ/yelp-material-app-frontend.git`
-2. Change directory: `cd yelp-material-frontend`
+2. Change directory: `cd yelp-material-app-frontend`
 3. Install dependencies: npm install
 4. Configure environment variables: apiUrl is currently linked with [deployed backend](https://yelp-material-app-backend.onrender.com/api) but can be changed to localhost instance
 5. ng serve
