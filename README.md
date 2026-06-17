@@ -5,6 +5,9 @@ Single-Page application built with Angular and Angular Material, replicating the
 **Live Demo:** https://dashing-duckanoo-556fe4.netlify.app
 
 ## Architecture & Design Patterns
+
+<img src="public/img/high-level-cloud-infrastructure-diagram.png" width="1000" />
+
 This application was recently refactored to strictly adhere to an **MVC-style (Service-Component-Model)** architecture:
 * **Models:** Strongly typed Data Transfer Objects (DTOs) for API consistency.
 * **Views (Components):** Pure UI components utilizing Angular Material for responsive, accessible design.
